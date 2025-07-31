@@ -2,7 +2,7 @@
 # MODIFIED 202507311053 <BEGIN>
 #######################
 .DS_Store
-node_modules
+#node_modules
 package-lock.json
 #######################
 # MODIFIED 202507311053 <END>
