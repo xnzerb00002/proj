@@ -4,14 +4,26 @@ import { join, dirname } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import loginRouter from './routes/login.js';
+import { initializeUsers } from './models/user.js';
 
 // Fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// MongoDB connection setup
+mongoose.connect('mongodb://localhost:27017/my_mongo_database')
+  .then(async () => {
+    console.log('MongoDB connected');
+    await initializeUsers();
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
 
 const app = express();
 
